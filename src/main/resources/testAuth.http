@@ -1,0 +1,19 @@
+
+POST http://localhost:8090/api/auth/sign-in
+Content-Type: application/json
+
+{
+  "email": "admin@admin.com",
+  "password": "123"
+}
+
+###
+POST http://localhost:8090/api/auth/sign-up
+Content-Type: application/json
+
+{
+  "email": "yy@user.com",
+  "password": "123"
+}
+
+

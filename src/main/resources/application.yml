@@ -1,0 +1,36 @@
+server:
+    port: 8090
+
+spring:
+    datasource:
+        url: jdbc:mysql://localhost:3306/lib
+        username: root
+        password:
+    jpa:
+        hibernate:
+            ddl-auto: update
+        show-sql: true
+        properties:
+            hibernate:
+                enable_lazy_load_no_trans: true
+
+    mail:
+        host: smtp.gmail.com
+        port: 587
+        username: otabekpanoevoq@gmail.com
+        password: Qwe.123.@@@
+        properties:
+            mail:
+                smtp:
+                    auth: true
+                    starttls:
+                        enable: true
+
+
+jwt:
+    access:
+        key: tHaX54Hwk^YMzKd@e@p7#70OZn0#D98BK8C1%T&hBnrzgqK28o
+        expiration-time: 72000000
+    refresh:
+        key: tHaX54Hwk^YdfdsMzK-d@e@&p7#%70OZ()BK8C1%T&hBnrzgqK287
+        expiration-time: 604800000

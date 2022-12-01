@@ -1,0 +1,33 @@
+POST http://localhost:8090/api/product/save
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE2NjgyNDk3MTMsImV4cCI6MTY2ODMyMTcxM30.X0QAv2xMu06qK26Th2SCUfHmvnEWOvaB6a26K0hZ3cJ4S53JGa92cs-38rcsKPH_4ve0RFikP4LQUNz4ulzFSA
+
+{
+  "name": "hh",
+  "quantity": 4,
+  "unitPrice": 25.32
+}
+
+
+
+### OCHIQ YOL
+GET http://localhost:8090/api/product/get/48550974-1872-4f8e-b50a-f524eaee5ca2
+Content-Type: application/json
+
+
+
+###
+PUT http://localhost:8090/api/product/edit/571d96ff-c0b8-49fb-878e-18dbd941cc64
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE2NjgwMTE0NTksImV4cCI6MTY2ODA4MzQ1OX0.-TSSXweclYdGF2h3zaT0uJj_3JkKt3hLaAjOXIZxFB3ucoenK4Dx51z3fADH_rTQam78hWNvIxvtMhQONz-h9Q
+
+{
+  "name": "kkk",
+  "quantity": 84,
+  "unitPrice": 25.32
+}
+
+###
+DELETE http://localhost:8090/api/product/delete/126a5125-d3ef-4cac-90e1-ca29937a509c
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ5eUB1c2VyLmNvbSIsImlhdCI6MTY2NDYwODQ0NSwiZXhwIjoxNjY0NjgwNDQ1fQ.fQJO3ZB3jxd7Kf15RZ4SvT-PeBt5TQq0e2QSzLDTIGXgwkqV15CWHy6S1xFa809skYz5TVg99KiXpO5yf3pvTA
