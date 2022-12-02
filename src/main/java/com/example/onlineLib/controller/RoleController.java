@@ -11,6 +11,6 @@ import java.util.UUID;
 public interface RoleController {
 
     @PreAuthorize(value = "hasAnyAuthority('SET_ROLE_TO_USER')" )
-    @PostMapping("/set-role/{user-id}")
-    ApiResult<Boolean> setRole(@NotNull(message = "role Id must be not null") @RequestBody Long roleId, @PathVariable @NotNull(message = "User Id must be not null") UUID id);
+    @PostMapping("/set-role/{role-id}/{user-id}")
+    ApiResult<Boolean> setRole(@NotNull(message = "role Id must be not null") @PathVariable("role-id") Long roleId, @PathVariable("user-id") @NotNull(message = "User Id must be not null") UUID id);
 }

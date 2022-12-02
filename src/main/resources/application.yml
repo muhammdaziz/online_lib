@@ -1,11 +1,20 @@
 server:
     port: 8090
 
+file:
+    upload-dir: /Users/user/desktop/web
+
 spring:
+    servlet:
+        multipart:
+            enabled: true
+            file-size-threshold: 2KB
+            max-file-size: 200MB
+            max-request-size: 250MB
     datasource:
-        url: jdbc:mysql://localhost:3306/lib
-        username: root
-        password:
+        url: jdbc:postgresql://localhost:5432/library
+        username: postgres
+        password: 1234qw
     jpa:
         hibernate:
             ddl-auto: update
@@ -17,8 +26,8 @@ spring:
     mail:
         host: smtp.gmail.com
         port: 587
-        username: otabekpanoevoq@gmail.com
-        password: Qwe.123.@@@
+        username: library@lib.com
+        password:
         properties:
             mail:
                 smtp:

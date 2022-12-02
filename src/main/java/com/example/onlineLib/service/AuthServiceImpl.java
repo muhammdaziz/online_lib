@@ -87,6 +87,9 @@ public class AuthServiceImpl implements UserDetailsService, AuthService {
         User user = new User(signDTO.getEmail(), encode);
 
         userRepository.save(user);
+
+//        sendNotificationMsgToUserMail(user);
+
         return ApiResult.successResponse(MessageLang.getMessageSource("SUCCESSFULLY_ADDED"));
 
     }

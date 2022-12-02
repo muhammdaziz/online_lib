@@ -1,5 +1,6 @@
 package com.example.onlineLib.entity;
 
+import com.example.onlineLib.entity.template.AbsAuditingEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,7 +21,7 @@ import java.util.UUID;
 @Table(name = "users")
 @NoArgsConstructor
 @ToString
-public class User implements UserDetails {
+public class User extends AbsAuditingEntity implements UserDetails {
 
     @Id
     @GeneratedValue(generator = "UUID")
