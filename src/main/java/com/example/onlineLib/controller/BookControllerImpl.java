@@ -1,16 +1,13 @@
 package com.example.onlineLib.controller;
 
-import com.example.onlineLib.payload.ApiResult;
-import com.example.onlineLib.payload.BookAddDTO;
-import com.example.onlineLib.payload.BookDTO;
+import com.example.onlineLib.payload.*;
 import com.example.onlineLib.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 
 @RestController
@@ -25,27 +22,27 @@ public class BookControllerImpl implements BookController{
     }
 
     @Override
-    public ApiResult<BookDTO> book(Long id) {
+    public ApiResult<BookDTO> book(UUID id) {
         return bookService.get(id);
     }
 
     @Override
-    public ApiResult<List<BookDTO>> books() {
-        return bookService.list();
+    public ApiResult<BookListDTO> books(Integer pageNumber, Integer size, Integer categoryId) {
+        return bookService.list(pageNumber, size, categoryId);
     }
 
     @Override
-    public ApiResult<Boolean> edit(Long id) {
-        return bookService.update(id);
+    public ApiResult<List<BookDTO>> newBooks() {
+        return bookService.newBooks();
     }
 
     @Override
-    public ApiResult<Boolean> delete(Long id) {
+    public ApiResult<Boolean> edit(BookDTO bookDTO) {
+        return bookService.update(bookDTO);
+    }
+
+    @Override
+    public ApiResult<Boolean> delete(UUID id) {
         return bookService.delete(id);
-    }
-
-    @Override
-    public void download(Long id, HttpServletResponse response) throws IOException {
-        bookService.download(id, response);
     }
 }

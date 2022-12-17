@@ -17,34 +17,24 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @SQLDelete(sql = "UPDATE book SET deleted=true WHERE id=?")
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"title", "author_id"}))
-public class Book extends AbsAuditingEntity {
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"book_id"}))
+public class AuthorBook extends AbsAuditingEntity {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID",
             strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
 
-    @Column(nullable = false)
-    private String title;
-
     @ManyToOne(optional = false)
-    private Author author;
-
-    @Column(nullable = false)
-    private String language;
-
-    private String context;
-
-    @Column(nullable = false)
-    private Float price;
+    private Book book;
 
     @OneToOne(optional = false)
-    private FileImg image;
+    private FileImg bgImg;
 
-    @OneToOne(optional = false)
-    private FileImg document;
+    @Column(nullable = false)
+    private String text;
 
-    @ManyToOne(optional = false)
-    private Category category;
+    private String fontFamily;
+
+    private String fontSize;
 }

@@ -1,35 +1,35 @@
 package com.example.onlineLib.controller;
 
-import com.example.onlineLib.payload.ApiResult;
-import com.example.onlineLib.payload.BookAddDTO;
-import com.example.onlineLib.payload.BookDTO;
-import com.example.onlineLib.utils.RestConstants;
+import com.example.onlineLib.payload.*;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 @RequestMapping("api/book")
 public interface BookController {
 
     @PostMapping(value = "/new")
+    @PreAuthorize(value = "hasAnyAuthority('ADD_BOOK')")
     ApiResult<Boolean> add(@RequestBody BookAddDTO bookAddDTO) throws IOException;
 
     @GetMapping("/{id}")
-    ApiResult<BookDTO> book(@PathVariable Long id);
+    ApiResult<BookDTO> book(@PathVariable UUID id);
 
-    @GetMapping("/list")
-    ApiResult<List<BookDTO>> books();
+    @GetMapping("/list/{pageNumber}/{size}/{categoryId}")
+    ApiResult<BookListDTO> books(@PathVariable Integer pageNumber, @PathVariable Integer size, @PathVariable Integer categoryId);
 
-    @PutMapping(value="/{id}")
-    ApiResult<Boolean> edit(@PathVariable Long id);
+    @GetMapping("/list/news")
+    ApiResult<List<BookDTO>> newBooks();
 
-    @DeleteMapping(value="/{id}")
-    ApiResult<Boolean> delete(@PathVariable Long id);
+    @PutMapping()
+    @PreAuthorize(value = "hasAnyAuthority('EDIT_BOOK')")
+    ApiResult<Boolean> edit(@RequestBody BookDTO bookDTO);
 
+    @DeleteMapping(value="/delete/{id}")
+    @PreAuthorize(value = "hasAnyAuthority('DELETE_BOOK')")
+    ApiResult<Boolean> delete(@PathVariable UUID id);
 
-    @GetMapping("/download/{id}")
-    void download(@PathVariable Long id, HttpServletResponse response) throws IOException;
 }

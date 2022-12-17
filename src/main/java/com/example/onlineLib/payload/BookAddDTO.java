@@ -3,20 +3,22 @@ package com.example.onlineLib.payload;
 import lombok.Getter;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.UUID;
+
 @Getter
 public class BookAddDTO {
 
-    String title;
+    private String title;
 
-    String author;
+    private UUID authorId;
 
-    String language;
+    private String language;
 
-    String context;
+    private String context;
 
-    Float price;
+    private Float price;
 
-    MultipartFile file;
+    private MultipartFile file;
 
-    MultipartFile image;
+    private MultipartFile image;
 }

@@ -18,7 +18,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @SQLDelete(sql = "UPDATE book SET deleted=true WHERE id=?")
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"title", "author_id"}))
-public class Book extends AbsAuditingEntity {
+public class BookFile extends AbsAuditingEntity {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID",
@@ -40,10 +40,10 @@ public class Book extends AbsAuditingEntity {
     private Float price;
 
     @OneToOne(optional = false)
-    private FileImg image;
+    private FileImg img;
 
     @OneToOne(optional = false)
-    private FileImg document;
+    private FileImg path;
 
     @ManyToOne(optional = false)
     private Category category;

@@ -1,0 +1,60 @@
+//////////////////////////////////////////////////////////////////////////////
+
+Author
+
+4242f252-b2a3-44da-951d-94a78d329769,2022-12-11 14:30:11.000000,false,2022-12-11 14:30:14.000000,,,GenerationTarget encountered exception accepting command : Error executing,Mosh,/Users/user/Desktop/web/img/mosh.jpg,Hamedani
+4242f252-b2a3-44da-951d-94a78d329771,2022-12-11 14:30:11.000000,false,2022-12-11 14:30:14.000000,,,GenerationTarget encountered exception accepting command : Error executing,Alice,/Users/user/Desktop/web/img/mosh.jpg,Alices
+4242f252-b2a3-44da-951d-94a78d329772,2022-12-11 14:30:11.000000,false,2022-12-11 14:30:14.000000,,,GenerationTarget encountered exception accepting command : Error executing,Jon,/Users/user/Desktop/web/img/mosh.jpg,Brain
+4242f252-b2a3-44da-951d-94a78d329773,2022-12-11 14:30:11.000000,false,2022-12-11 14:30:14.000000,,,GenerationTarget encountered exception accepting command : Error executing,Jack,/Users/user/Desktop/web/img/mosh.jpg,Ma
+4242f252-b2a3-44da-951d-94a78d329774,2022-12-11 14:30:11.000000,false,2022-12-11 14:30:14.000000,,,GenerationTarget encountered exception accepting command : Error executing,Bill,/Users/user/Desktop/web/img/mosh.jpg,Gates
+4242f252-b2a3-44da-951d-94a78d329775,2022-12-11 14:30:11.000000,false,2022-12-11 14:30:14.000000,,,GenerationTarget encountered exception accepting command : Error executing,Stive,/Users/user/Desktop/web/img/mosh.jpg,Jobs
+
+
+//////////////////////////////////////////////////////////////////////////////
+
+Book
+
+12345678-1234-1234-1234-123456789012,2022-12-11 15:09:41.000000,false,2022-12-11 15:09:44.000000,,,"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et",/Users/user/Desktop/web/img/Test Builder.png,English,/Users/user/Desktop/web/pdf/TESTBUILDER ONE.pdf,0,Test Builder,4242f252-b2a3-44da-951d-94a78d329769,1
+4242f252-b2a3-44da-951d-94a78d329769,2022-12-11 15:09:41.000000,false,2022-12-11 15:09:44.000000,,,"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et",/Users/user/Desktop/web/img/Test Builder.png,Turkish,/Users/user/Desktop/web/pdf/TESTBUILDER ONE.pdf,5,Test Builder,4242f252-b2a3-44da-951d-94a78d329771,1
+239214fc-b981-488e-84ce-64dc95ad4c52,2022-12-11 15:09:41.000000,false,2022-12-11 15:09:44.000000,,,"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et",/Users/user/Desktop/web/img/Java 8 interview questions.png,English,/Users/user/Desktop/web/pdf/Java 8 Interview Questions.pdf,0,Java 8 interview questions,4242f252-b2a3-44da-951d-94a78d329772,2
+24805bc2-a5a7-4842-a1c6-e98bf2187989,2022-12-11 15:09:41.000000,false,2022-12-11 15:09:44.000000,,,"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et",/Users/user/Desktop/web/img/Destination B1.png,English,/Users/user/Desktop/web/pdf/Destination B1.pdf,1,Destination B1,4242f252-b2a3-44da-951d-94a78d329773,1
+aa405740-f93d-45cd-a2b1-7ac7e2768834,2022-12-11 15:09:41.000000,false,2022-12-11 15:09:44.000000,,,"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et",/Users/user/Desktop/web/img/ELS.png,中文,/Users/user/Desktop/web/pdf/elsthrough-reading.pdf,0,ELS,4242f252-b2a3-44da-951d-94a78d329769,3
+c2a457b6-4943-49a0-bc17-c7cc24076b99,2022-12-11 15:09:41.000000,false,2022-12-11 15:09:44.000000,,,"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et",/Users/user/Desktop/web/img/Listening for IELTS.png,English,/Users/user/Desktop/web/pdf/Lessons for IELTS Listening.pdf,0,Listeng for ILETS,4242f252-b2a3-44da-951d-94a78d329775,2
+
+
+
+//////////////////////////////////////////////////////////////////////////////
+
+category
+
+1,2022-12-11 09:52:12.000000,false,2022-12-11 09:52:30.000000,,,Fantasy,
+2,2022-12-11 09:52:14.000000,false,2022-12-11 09:52:32.000000,,,Literature,
+3,2022-12-11 09:52:16.000000,false,2022-12-11 09:52:34.000000,,,History,
+4,2022-12-11 09:52:18.000000,false,2022-12-11 09:52:36.000000,,,Art,
+5,2022-12-11 09:52:19.000000,false,2022-12-11 09:52:38.000000,,,Recourse,
+
+
+//////////////////////////////////////////////////////////////////////////////
+
+popular_book
+
+12345678-1234-1234-1234-123456789012,2022-12-11 10:37:06.000000,false,2022-12-11 10:37:09.000000,,,BOOK FAIR OFFER,"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna",12345678-1234-1234-1234-123456789012
+
+
+/////////////////////////////////////////////////////////////////////////////////
+
+/Users/user/Desktop/web/img/Test Builder.png
+/Users/user/Desktop/web/img/Test Builder.png
+/Users/user/Desktop/web/img/Java 8 interview questions.png
+/Users/user/Desktop/web/img/Destination B1.png
+/Users/user/Desktop/web/img/ELS.png
+/Users/user/Desktop/web/img/Listening for IELTS.png
+
+
+/Users/user/Desktop/web/pdf/TESTBUILDER ONE.pdf
+/Users/user/Desktop/web/pdf/TESTBUILDER ONE.pdf
+/Users/user/Desktop/web/pdf/Java 8 Interview Questions.pdf
+/Users/user/Desktop/web/pdf/Destination B1.pdf
+/Users/user/Desktop/web/pdf/elsthrough-reading.pdf
+/Users/user/Desktop/web/pdf/Lessons for IELTS Listening.pdf
+

@@ -47,7 +47,7 @@ public class DataLoader implements CommandLineRunner {
             Role roleADMIN = new Role();
             roleADMIN.setName(RoleEnum.ROLE_ADMIN.name());
             roleADMIN.setDescription("ADMIN");
-            roleADMIN.setPermissions(Set.of(PermissionEnum.ADD_PRODUCT));
+            roleADMIN.setPermissions(Set.of(PermissionEnum.ADD_BOOK));
             roleRepository.save(roleADMIN);
 
             User superAdmin = new User(

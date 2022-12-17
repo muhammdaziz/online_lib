@@ -9,8 +9,10 @@ public interface RestConstants {
     String[] OPEN_PAGES = {
             "/*",
             "/api/auth" + "/**",
-            "/api/book/**",
-            "/api/category/list",
-            "/api/category/get/{id}"
+            "/api/book/list/**",
+            "/api/book/{id}/**",
+            "/api/files/**",
+            "/api/category/list/**",
+            "/api/category/{id}",
     };
 }

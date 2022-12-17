@@ -1,24 +1,23 @@
 package com.example.onlineLib.service;
 
-import com.example.onlineLib.payload.ApiResult;
-import com.example.onlineLib.payload.BookAddDTO;
-import com.example.onlineLib.payload.BookDTO;
+import com.example.onlineLib.payload.*;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 public interface BookService {
 
     ApiResult<Boolean> add(BookAddDTO bookAddDTO) throws IOException;
 
-    ApiResult<BookDTO> get(Long id);
+    ApiResult<BookDTO> get(UUID id);
 
-    ApiResult<List<BookDTO>> list();
+    ApiResult<BookListDTO> list(Integer pageNumber, Integer size, Integer categoryId);
 
-    ApiResult<Boolean> delete(Long id);
+    ApiResult<List<BookDTO>> newBooks();
 
-    ApiResult<Boolean> update(Long id);
+    ApiResult<Boolean> delete(UUID id);
 
-    void download(Long id, HttpServletResponse response) throws IOException;
+    ApiResult<Boolean> update(BookDTO bookDTO);
+
 }

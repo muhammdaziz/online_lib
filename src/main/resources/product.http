@@ -11,3 +11,7 @@ Content-Type: multipart/form-data
 {
 
 }
+
+
+###
+GET http://localhost:8090/api/book/download/2

@@ -1,33 +1,30 @@
 package com.example.onlineLib.payload;
 
 import com.example.onlineLib.entity.Author;
+import com.example.onlineLib.entity.Book;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 import java.util.UUID;
 
 @Getter
-@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @ToString
-public class BookDTO {
+public class AuthorBookDTO {
 
     private UUID id;
 
-    private String title;
+    private BookDTO book;
 
-    private AuthorDTO author;
+    private String text;
 
-    private String language;
+    private UUID bgImg;
 
-    private String context;
+    private String fontFamily;
 
-    private Float price;
+    private String fontSize;
 
-    private UUID image;
-
-    private UUID document;
 }

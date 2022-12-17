@@ -1,63 +1,60 @@
 package com.example.onlineLib.service;
 
+import com.example.onlineLib.entity.Author;
 import com.example.onlineLib.entity.Book;
+import com.example.onlineLib.entity.FileImg;
 import com.example.onlineLib.exceptions.RestException;
-import com.example.onlineLib.payload.ApiResult;
-import com.example.onlineLib.payload.BookAddDTO;
-import com.example.onlineLib.payload.BookDTO;
+import com.example.onlineLib.payload.*;
+import com.example.onlineLib.repository.AuthorRepository;
 import com.example.onlineLib.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.InputStreamResource;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
-import java.util.Objects;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class BookServiceImpl implements BookService {
-
-    private static final int BUFFER_SIZE = 4096;
-
-    private static final String UPLOAD_DIRECTORY = "/Users/user/Desktop/web";
-
     private final BookRepository bookRepository;
+
+    private final AuthorServiceImpl authorService;
+
+    private final AuthorRepository authorRepository;
+
+    private final IOService ioService;
 
     @Override
     public ApiResult<Boolean> add(BookAddDTO bookAddDTO) throws IOException {
 
-        MultipartFile file = bookAddDTO.getFile();
+        Author author = authorRepository.findById(bookAddDTO.getAuthorId())
+                .orElseThrow(() ->
+                        RestException
+                                .restThrow("AUTHOR NOT FOUND", HttpStatus.NOT_FOUND));
 
-        MultipartFile image = bookAddDTO.getImage();
+        if(bookRepository.existsByTitleAndAuthorId(bookAddDTO.getTitle(), bookAddDTO.getAuthorId()))
+            throw RestException
+                    .restThrow("BOOK WITH THIS AUTHOR IS EXIST", HttpStatus.CONFLICT);
 
-        if (file.isEmpty() || image.isEmpty())
-            throw RestException.restThrow("No file chosen", HttpStatus.BAD_REQUEST);
 
         Book book = new Book();
         book.setTitle(bookAddDTO.getTitle());
         book.setContext(bookAddDTO.getContext());
-        book.setAuthor(bookAddDTO.getAuthor());
+        book.setAuthor(author);
         book.setLanguage(bookAddDTO.getLanguage());
         book.setPrice(bookAddDTO.getPrice());
 
-        Path path1 = Paths.get(UPLOAD_DIRECTORY, image.getOriginalFilename());
-        Files.write(path1, image.getBytes());
-        book.setImg(path1.toString());
 
-        Path path = Paths.get(UPLOAD_DIRECTORY, file.getOriginalFilename());
-        Files.write(path, file.getBytes());
-        book.setPath(path.toString());
+        book.setImage(
+                ioService.upload(
+                        bookAddDTO.getImage(), true));
+        book.setDocument(
+                ioService.upload(
+                        bookAddDTO.getFile(), false));
 
         bookRepository.save(book);
 
@@ -65,7 +62,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public ApiResult<BookDTO> get(Long id) {
+    public ApiResult<BookDTO> get(UUID id) {
 
         Book book = bookRepository.findByIdAndDeletedFalse(id).orElseThrow(
                 () -> RestException
@@ -75,17 +72,42 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public ApiResult<List<BookDTO>> list() {
+    public ApiResult<BookListDTO> list(Integer pageNumber, Integer size, Integer categoryId) {
 
-        List<Book> books = bookRepository.findAllByDeletedFalse();
+        List<Book> books;
+        Double booksCount;
+
+        if(categoryId < 0) {
+            books = bookRepository.findAllByDeletedFalse(PageRequest.of(pageNumber, size));
+            booksCount = bookRepository.findBooksCount();
+        }else {
+            books = bookRepository.findAllByDeletedFalseAndCategoryId(PageRequest.of(pageNumber, size), categoryId);
+            booksCount = bookRepository.findBooksCountByCategory(categoryId);
+        }
+
+        booksCount = Math.ceil(booksCount/size);
+
+        System.out.println("pages " + booksCount);
+
+        BookListDTO bookListDTO = BookListDTO.builder()
+                .list(mapBookDTO(books))
+                .pages(booksCount.intValue())
+                .build();
+
+        return ApiResult.successResponse(bookListDTO);
+    }
+
+    @Override
+    public ApiResult<List<BookDTO>> newBooks() {
+        List<Book> books = bookRepository.findAllNewBooks();
 
         return ApiResult.successResponse(mapBookDTO(books));
     }
 
     @Override
-    public ApiResult<Boolean> delete(Long id) {
+    public ApiResult<Boolean> delete(UUID id) {
 
-        Book book = bookRepository.findByIdAndDeletedFalse(id).orElseThrow(
+        bookRepository.findByIdAndDeletedFalse(id).orElseThrow(
                 () -> RestException
                         .restThrow("Book not found", HttpStatus.NOT_FOUND));
 
@@ -95,41 +117,29 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public ApiResult<Boolean> update(Long id) {
-        return null;
+    public ApiResult<Boolean> update(BookDTO bookDTO) {
+        return ApiResult.successResponse();
     }
 
-    @Override
-    public void download(Long id, HttpServletResponse response) throws IOException {
-        String filePath = getBookPath(id);
+    public BookDTO mapBookDTO(Book book) {
 
-        // construct the complete absolute path of the file
-        File downloadFile = new File(filePath);
-        FileInputStream inputStream = new FileInputStream(downloadFile);
+        Author author = book.getAuthor();
 
-        // set headers for the response
-        String headerKey = "Content-Disposition";
-        String headerValue = String.format("attachment; filename=\"%s\"",
-                downloadFile.getName());
-        response.setHeader(headerKey, headerValue);
+        AuthorDTO authorDTO = null;
 
-        // get output stream of the response
-        OutputStream outStream = response.getOutputStream();
+        if (author != null)
+            authorDTO = authorService.mapAuthorDTO(book.getAuthor());
 
-        byte[] buffer = new byte[BUFFER_SIZE];
-        int bytesRead = -1;
-//
-        // write bytes read from the input stream into the output stream
-        while ((bytesRead = inputStream.read(buffer)) != -1) {
-            outStream.write(buffer, 0, bytesRead);
-        }
-
-        inputStream.close();
-        outStream.close();
-    }
-
-    private String getBookPath(Long id) {
-        return bookRepository.findPathById(id);
+        return BookDTO.builder()
+                .id(book.getId())
+                .title(book.getTitle())
+                .context(book.getContext())
+                .language(book.getLanguage())
+                .price(book.getPrice())
+                .author(authorDTO)
+                .document(book.getDocument().getId())
+                .image(book.getImage().getId())
+                .build();
     }
 
     private List<BookDTO> mapBookDTO(List<Book> books){
@@ -138,23 +148,4 @@ public class BookServiceImpl implements BookService {
                 .collect(Collectors.toList());
     }
 
-    private BookDTO mapBookDTO(Book book) {
-
-        InputStreamResource img = new InputStreamResource(
-                Objects
-                        .requireNonNull(
-                                getClass().getResourceAsStream(
-                                        book.getImg())));
-
-        return BookDTO.builder()
-                .id(book.getId())
-                .title(book.getTitle())
-                .context(book.getContext())
-                .language(book.getLanguage())
-                .price(book.getPrice())
-                .author(book.getAuthor())
-                .path(book.getPath())
-                .img(img)
-                .build();
-    }
 }
